@@ -1,0 +1,93 @@
+
+<script>
+var alignments = ["justify","left","center","right"];
+
+var alignmentindex = Math.floor(Math.random()*alignments.length);
+
+var size = Math.floor(Math.random()*20)+Math.floor(Math.random()*60)+Math.floor(Math.random()*70)+10;
+
+document.getElementById("yomis").style.fontSize = size+"px";
+document.getElementById("yomis").style.textAlign = alignments[alignmentindex];
+
+</script>
+
+
+<div id="yomis">
+<p class="yomis"><p>
+<div class="randomfontjapanese">{{Expression}}</div>
+<div class="randomfontchisimp">{{Simplified}}</div>
+<div class="randomfontchitrad">{{Traditional}}</div>
+<div id="container"></div>
+
+<script>
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+setTimeout(() => {
+    const fields = [...document.querySelectorAll(".shuffle")];
+    shuffleArray(fields);
+    const container = document.getElementById("container");
+    fields.forEach((fld, index) => {
+        if (index !== 0) {
+            container.appendChild(document.createElement(""));
+        }
+        container.appendChild(fld);
+    });
+}, 0);
+
+
+
+		var fieldID = "container";
+    var randomHsl = (isNightMode) => {
+        const hue = (Math.random() * 361) | 0;
+        const saturation = (Math.random() * 101) | 0;
+        let lightness = (Math.random() * 51) | 0;
+        if (isNightMode) {
+            lightness += 50;
+        }
+        return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    };
+    var colorizeEachChar = (fieldId) => {
+        const text = document.getElementById(fieldId).textContent;
+        const nightMode = document.body.classList.contains("night_mode");
+        const resultArray = [];
+        for (const char of text) {
+            if (/\S/.test(char)) {
+                resultArray.push(
+                    `<span style="color: ${randomHsl(nightMode)};">${char}</span>`
+                );
+            } else {
+                resultArray.push(" ");
+            }
+        }
+        return resultArray.join("");
+    };
+    setTimeout(() => {
+        const ele = document.getElementById(fieldID);
+        ele.innerHTML = colorizeEachChar(fieldID);
+        ele.hidden = false;
+    }, 0);
+
+</script>
+
+</p>
+</div>
+
+<script>
+    function random_bg_color() {
+        var x = Math.floor(Math.random() * 256);
+        var y = Math.floor(Math.random() * 256);
+        var z = Math.floor(Math.random() * 256);
+        var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+     console.log(bgColor);
+     document.body.style.background = bgColor;
+    }
+
+    random_bg_color();
+
+</script>
+
